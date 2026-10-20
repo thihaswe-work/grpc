@@ -1,0 +1,57 @@
+syntax = "proto3";
+
+package greeter;
+
+// ============================================================
+// 1. THE SERVICE — what operations exist.
+//    Think of this as the "interface" both sides agree on.
+// ============================================================
+service Greeter {
+  // Unary: one request in, one response out. Like a normal function call.
+  rpc SayHello (HelloRequest) returns (HelloResponse);
+
+  // Server streaming: one request in, a stream of responses out.
+  rpc CountDown (CountdownRequest) returns (stream CountdownEvent);
+
+  // Client streaming: a stream of requests in, one response out.
+  rpc SumNumbers (stream NumberChunk) returns (SumResult);
+
+  // Bidirectional streaming: both sides stream at the same time.
+  rpc Chat (stream ChatMessage) returns (stream ChatMessage);
+}
+
+// ============================================================
+// 2. THE MESSAGES — the data shapes that travel over the wire.
+// ============================================================
+
+message HelloRequest {
+  string name = 1;   // `1` is the FIELD NUMBER, not a value.
+}
+
+message HelloResponse {
+  string message = 1;
+}
+
+message CountdownRequest {
+  int32 from = 1;
+}
+
+message CountdownEvent {
+  int32 remaining = 1;
+  string at = 2;
+}
+
+message NumberChunk {
+  int32 value = 1;
+}
+
+message SumResult {
+  int64 total = 1;
+  int32 count = 2;
+}
+
+message ChatMessage {
+  string user = 1;
+  string text = 2;
+  int64 sent_at_unix = 3;
+}

@@ -1,0 +1,16 @@
+{
+  "name": "grpc-demo",
+  "version": "1.0.0",
+  "description": "A full gRPC learning project: unary, server-streaming, client-streaming, and bidirectional streaming.",
+  "type": "module",
+  "main": "src/server.js",
+  "scripts": {
+    "server": "node src/server.js",
+    "client": "node src/client.js",
+    "both": "node src/server.js & node src/client.js"
+  },
+  "dependencies": {
+    "@grpc/grpc-js": "^1.12.0",
+    "@grpc/proto-loader": "^0.7.13"
+  }
+}
